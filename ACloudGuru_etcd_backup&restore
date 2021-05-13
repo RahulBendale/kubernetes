@@ -1,0 +1,28 @@
+ETCDCTL_API=3 etcdctl get cluster.name \
+--endpoints=https://10.0.1.101:2379 \
+--cacert=/home/cloud_user/etcd-certs/etcd-ca.pem \
+--cert=/home/cloud_user/etcd-certs/etcd-server.crt \
+--key=/home/cloud_user/etcd-certs/etcd-server.key
+
+
+ETCDCTL_API=3 etcdctl snapshot save /home/cloud_user/etcd_backup.db \
+ --endpoints=https://10.0.1.101:2379 \
+ --cacert=/home/cloud_user/etcd-certs/etcd-ca.pem \
+ --cert=/home/cloud_user/etcd-certs/etcd-server.crt \
+ --key=/home/cloud_user/etcd-certs/etcd-server.key
+
+
+
+ls
+
+
+sudo systemctl stop etcd
+
+
+sudo rm -rf /var/lib/etcd
+
+sudo ETCDCTL_API=3 etcdctl snapshot restore /home/cloud_user/etcd_backup.db \
+ --initial-cluster etcd-restore=https://10.0.1.101:2380 \
+ --initial-advertise-peer-urls https://10.0.1.101:2380 \
+ --name etcd-restore \
+ --data-dir /var/lib/etcd
