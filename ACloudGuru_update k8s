@@ -1,0 +1,95 @@
+Control node
+
+kubectl get nodes
+
+sudo apt-get update && \
+
+sudo apt-get install -y --allow-change-held-packages kubeadm=1.20.2-00
+
+kubeadm version
+
+
+kubectl drain k8s-control --ignore-daemonsets
+
+sudo kubeadm upgrade plan v1.20.2
+
+sudo kubeadm upgrade apply v1.20.2
+
+y
+
+
+
+sudo apt-get update && \
+
+sudo apt-get install -y --allow-change-held-packages kubelet=1.20.2-00 kubectl=1.20.2-00
+
+sudo systemctl daemon-reload
+
+sudo systemctl restart kubelet
+
+kubelet uncordon k8s-control
+
+kubectl get nodes
+
+
+************************************************************************************************************************+
+
+
+
+On Control node
+
+kubectl drain k8s-worker1 --ignore-daemonsets --force
+
+
+
+On worker1 node:--
+
+sudo apt-get update && \
+sudo apt-get install -y --allow-change-held-packages kubeadm=1.20.2-00
+
+kubeadm version
+sudo kubeadm upgrade node              
+sudo apt-get update && \
+sudo apt-get install -y --allow-change-held-packages kubelet=1.20.2-00 kubectl=1.20.2-00
+sudo systemctl daemon-reload
+sudo systemctl restart kubelet
+
+
+On control node:---
+
+kubectl uncordon k8s-worker1
+
+kubectl get nodes
+
+
+************************************************************************************************************************+
+
+On Control node
+
+kubectl drain k8s-worker2 --ignore-daemonsets --force
+
+
+
+On worker2 node:--
+
+sudo apt-get update && \
+
+sudo apt-get install -y --allow-change-held-packages kubeadm=1.20.2-00
+
+kubeadm version
+
+sudo kubeadm upgrade node              ----------This command is for specificialy for upgrade worker node
+
+sudo apt-get update && \
+sudo apt-get install -y --allow-change-held-packages kubelet=1.20.2-00 kubectl=1.20.2-00
+
+sudo systemctl daemon-reload
+
+sudo systemctl restart kubelet
+
+
+On control node:---
+
+kubectl uncordon k8s-worker2
+
+kubectl get nodes
