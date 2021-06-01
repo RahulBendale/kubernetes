@@ -10,5 +10,5 @@ spec:
       httpGet:
         path: /
         port: 80
-      failureThreshold: 5
+      failureThreshold: 30
       periodSecond: 10
