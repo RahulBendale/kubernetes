@@ -4,10 +4,10 @@ metadata:
   name: auth-gateway
   namespace: beebox-auth
 spec:
-  nodeselector:
-   external-auth-services: "true"
- containers:
- - name: nginx
-   image: nginx:1.19.1
-   ports:
-   - containerPort: 80
+  nodeSelector:
+    external-auth-services: "true"
+  containers:
+  - name: nginx
+    image: nginx:1.19.1
+    ports:
+    - containerPort: 80
