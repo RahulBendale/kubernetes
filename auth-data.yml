@@ -1,10 +1,10 @@
-apiVersion: v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: auth-data
   namespace: beebox-auth
 spec:
-  replica: 3
+  replicas: 3
   selector:
     matchLabels:
       app: auth-data
@@ -14,8 +14,8 @@ spec:
         app: auth-data
     spec:
       nodeSelector:
-	external-auth-services: "true"
-      containers:	 	    
+        external-auth-services: "true"
+      containers:
       - name: nginx
         image: nginx:1.19.1
         ports:
