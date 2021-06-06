@@ -1,0 +1,33 @@
+Your company, Beebox, is in the process of building a microservice application for Kubernetes.
+
+They have a backend database of user information and a web frontend, both of which are managed using deployments. Both of these applications are also still being developed and are currently just using simple Nginx containers for testing. You have been asked to set up appropriate Kubernetes Services for these application components.
+
+The user database is a backend service that should only be accessible by other components within the cluster. The web frontend needs to be accessible by users outside the cluster. Locate the existing deployments and create the necessary Services to expose them. There is an existing Pod called busybox which you can use to test Services.
+
+
+Find the user-db deployment in the default namespace. Create a Service that will expose its Pods to other components within the cluster. This Service should not be accessible from outside the cluster.
+
+
+Locate the web-frontend deployment in the default namespace as well. Create a Service that will expose its Pods on port 30080 of each cluster node.
+
+
+
+user-db-svc.yml
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-db-svc
+spec:
+  type: ClusterIP
+  selector:
+    app: user-db
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      
+      
+      
+      
+ 
