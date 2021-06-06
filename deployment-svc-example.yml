@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-svc-example
+  namespace: np-test
+spec:
+  replicas: 3
+  selector:
+   matchLabels:
+     app: svc-example
+  template:
+    metadata:
+      labels:
+        app: svc-example
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.19.1
+        port:
+        - containerPort: 80
