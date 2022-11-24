@@ -11,7 +11,7 @@ spec:
     volumeMounts: 
     - name: pv-storage
       mountPath: /output
-   volumes:
-   - name: pv-storage
-     persistentVolumeClaim: 
-       clainName: host-storage-pvc
+  volumes:
+  - name: pv-storage
+    persistentVolumeClaim: 
+      claimName: host-storage-pvc
