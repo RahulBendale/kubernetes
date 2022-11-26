@@ -1,0 +1,21 @@
+apiVersion:
+kind: Pod
+metadata:
+  name: shared-volume-pod
+spec:
+  containers:
+  - name: busybox1
+    image: busybox
+    command: ['sh', '-c', 'while true; do echo Success! > /output/output.txt; sleep 5; done']
+    volumeMount:
+    - name: my-volume
+      mountPath: /output
+  - name: busybox2
+    image: busybox
+    command: ['sh', '-c', 'while true; do cat /input/output.txt; sleep 5; done']
+    volumeMount:
+    - name: my-volume
+      mountPath: /input
+  volumes:
+  - name: my-volume
+    emptyDir: {}
